@@ -9,3 +9,4 @@ function component() {
 }
 
 document.body.appendChild(component());
+document.getElementById("search").focus()
