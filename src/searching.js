@@ -45,24 +45,38 @@ export class Searching {
     this.displayCb(matchedRides);
   }
 
+  // Naturally this grows enough to be its own stupid thing, factor out eventually
   _getSearchTokens(){
     const text = this._value().toLowerCase();
-    const words = text.split(' ');
+    const words = text.split(/\s+/);
     const result = [];
+    let prefix = '';
     let token = '';
-    words.forEach(word => {
-      // console.log(`consider ${word}`)
+    function handleWord(word){
+      console.log(`consider ${word}`)
       if(word.startsWith('"') && word.endsWith('"')){
-        return result.push(word.replace(/^"/, '').replace(/"$/, ''));
+        word = word.replace(/^"/, '').replace(/"$/, '')
+        if(prefix){
+          result.push({ [prefix]: word})
+          prefix = '';
+          return;
+        }
+        return result.push(word);
       }
       if(word.startsWith('"')){
         token = word.replace(/^"/, '')
         return;
       }
       if(word.endsWith('"')){
-        word = word.replace(/"$/, '');
         if(token){
-          result.push(`${token} ${word}`);
+          word = word.replace(/"$/, '');
+          if(prefix){
+            result.push({[prefix]: `${token} ${word}`})
+          }
+          else {
+            result.push(`${token} ${word}`);            
+          }
+          prefix = '';
           token = '';
           return;
         }
@@ -71,9 +85,20 @@ export class Searching {
         token = `${token} ${word}`;
         return;
       }
+      if(word.match(/^\w+:/)){
+        const index = word.indexOf(':');
+        prefix = word.substring(0, index);
+        console.log(`word still ${word}`);
+        const rest = word.substring(index+1); 
+        console.log(`pre ${prefix} rest ${rest}`);
+        return handleWord(rest);
+      }
+
+      prefix = '';
       token = '';
       result.push(word);
-    });
+    };
+    words.forEach(handleWord);
     return result;
   }
 
