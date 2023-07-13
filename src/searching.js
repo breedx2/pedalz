@@ -53,7 +53,6 @@ export class Searching {
     let prefix = '';
     let token = '';
     function handleWord(word){
-      console.log(`consider ${word}`)
       if(word.startsWith('"') && word.endsWith('"')){
         word = word.replace(/^"/, '').replace(/"$/, '')
         if(prefix){
@@ -93,6 +92,12 @@ export class Searching {
         console.log(`pre ${prefix} rest ${rest}`);
         return handleWord(rest);
       }
+      if(prefix){
+        result.push([prefix, word]);
+        prefix = '';
+        token = '';
+        return;
+      }
 
       prefix = '';
       token = '';
@@ -109,10 +114,10 @@ export class Searching {
       return tokens.every( token => { 
         if(Array.isArray(token)){
           const [k,v] = token;
-          console.log(`ninja ${ride.organizer} ${v}`)
           if(k === 'host' && ride.organizer.toLowerCase().includes(v)){
             return true;
           }
+          //TODO: Other fielded shits we care about here
           return false;
         }
         // TODO: This sucks because it matches object keys, whatever, nobody cares.

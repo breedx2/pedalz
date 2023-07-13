@@ -3,6 +3,7 @@ import eventsAll from './events-all.json';
 import { Searching } from './searching';
 
 const rides = eventsAll.events;
+rides.sort((a,b) => `${a.date} ${a.time}` > `${b.date} ${b.time}`)
 
 function clearRides(){
   document.querySelector('div#rides').innerHTML = '';
