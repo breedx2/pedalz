@@ -67,6 +67,10 @@ export class Searching {
           return;
         }
       }
+      if(token){
+        token = `${token} ${word}`;
+        return;
+      }
       token = '';
       result.push(word);
     });
