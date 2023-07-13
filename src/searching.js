@@ -1,13 +1,14 @@
 
 export class Searching {
   
-  constructor(){
+  constructor(rides, displayCb){
     this.timer = null;
+    this.rides = rides;
+    this.displayCb = displayCb;
     const self = this;
     this._input().addEventListener('input', e => self._searchChanged(e));
     this._input().focus();
   }
-
 
   _searchChanged(e){
     if(this.timer){
@@ -19,8 +20,13 @@ export class Searching {
 
   _search(){
     this.timer = null;
-    const text = this._value();
-    console.log('it changed for realz: ' + text);  
+    const text = this._value().toLowerCase();
+    console.log('it changed for realz: ' + text);
+    const matchedRides = this.rides.filter(ride => { 
+      return JSON.stringify(ride).toLowerCase().includes(text);
+    });
+    console.log(`matched ${matchedRides.length}`)
+    this.displayCb(matchedRides);
   }
 
   _input(){

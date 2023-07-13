@@ -51,7 +51,12 @@ function addRide(ride){
   rideDiv.appendChild(document.createElement('hr'));
 }
 
-const searching = new Searching();
+function displayResults(matchedRides){
+  clearRides();
+  matchedRides.forEach(ride => addRide(ride));
+}
+
+const searching = new Searching(rides, displayResults);
 
 console.log(rides[0]);
 clearRides();
