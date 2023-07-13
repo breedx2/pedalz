@@ -1,4 +1,11 @@
 
+
+function localNow() {
+  const date = new Date();
+  var newDate = new Date(date.getTime() - date.getTimezoneOffset()*60*1000);
+  return newDate;   
+}
+
 export class Searching {
   
   constructor(rides, displayCb){
@@ -29,8 +36,7 @@ export class Searching {
     const text = this._value().toLowerCase();
     console.log('doing a search: ' + text);
     const includePast = document.querySelector('input#past').checked;
-    const today = new Date().toISOString().split('T')[0];
-
+    const today = localNow().toISOString().split('T')[0];
     const rides = this.rides.filter(ride => { 
       return includePast || (ride.date >= today);
     });
@@ -39,22 +45,40 @@ export class Searching {
     this.displayCb(matchedRides);
   }
 
-  _searchTokens(){
+  _getSearchTokens(){
     const text = this._value().toLowerCase();
     const words = text.split(' ');
     const result = [];
     let token = '';
     words.forEach(word => {
+      // console.log(`consider ${word}`)
+      if(word.startsWith('"') && word.endsWith('"')){
+        return result.push(word.replace(/^"/, '').replace(/"$/, ''));
+      }
+      if(word.startsWith('"')){
+        token = word.replace(/^"/, '')
+        return;
+      }
+      if(word.endsWith('"')){
+        word = word.replace(/"$/, '');
+        if(token){
+          result.push(`${token} ${word}`);
+          token = '';
+          return;
+        }
+      }
+      token = '';
       result.push(word);
     });
     return result;
   }
 
   _tokenFilter(rides){
-    const tokens = this._searchTokens();
-    console.log(`tokens: ${tokens}`)
+    const tokens = this._getSearchTokens();
+    console.log(`tokens: ${JSON.stringify(tokens)}`)
     return rides.filter(ride => { 
       return tokens.every( token => { 
+        // TODO: This sucks because it matches object keys, whatever, nobody cares.
         return JSON.stringify(ride).toLowerCase().includes(token);
       });
     });

@@ -17,14 +17,15 @@ function makeCardHtml(ride){
   }
   let startLoc = `${ride.venue} - ${ride.address}`;
   if(ride.locdetails) {
-    startLoc += ` (${(ride.locdetails||'').trim()})`;
+    startLoc += ` (${ride.locdetails.trim()})`;
   }
   //TODO: Make date clickable
-  html += `    
-  </h1>
-  <b>When</b>: <rdate>${ride.date} ${ride.time}</rdate>
-  <rtdeets>(${ride.timedetails})</rtdeets>
-  <br/>
+  html += `</h1>
+  <b>When</b>: <rdate>${ride.date} ${ride.time}</rdate>`;
+  if(ride.timedetails){
+    html += `<rtdeets> (${ride.timedetails})</rtdeets>`;
+  }
+  html += `<br/>
   <b>Start</b>: <rstart>${startLoc}</rstart>
   <br/>`;
   if(ride.locend){
