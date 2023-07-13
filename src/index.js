@@ -61,4 +61,5 @@ const searching = new Searching(rides, displayResults);
 console.log(rides[0]);
 clearRides();
 //TODO: initially filter on future rides only
-rides.forEach(ride => addRide(ride));
+searching.search();
+// rides.forEach(ride => addRide(ride));
