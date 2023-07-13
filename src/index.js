@@ -11,9 +11,9 @@ function clearRides(){
 function makeCardHtml(ride){
   let html = `
   <h1>${ride.title}
-    <a title='pedalpalooza permalink' href="${ride.shareable}">🔗</a>`;
+    <a title='pedalpalooza permalink' href="${ride.shareable}">🚲</a>`;
   if(ride.weburl){
-    html += `<a title='web link' href="${ride.weburl}">🕸️</a>`;
+    html += `&nbsp;<a title='web link' href="${ride.weburl}">🕸️</a>`;
   }
   let startLoc = `${ride.venue} - ${ride.address}`;
   if(ride.locdetails) {
@@ -54,6 +54,7 @@ function addRide(ride){
 function displayResults(matchedRides){
   clearRides();
   matchedRides.forEach(ride => addRide(ride));
+  document.querySelector('span#matchct').innerHTML = `<b>[${matchedRides.length} rides found]</b>`;
 }
 
 const searching = new Searching(rides, displayResults);

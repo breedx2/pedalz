@@ -31,14 +31,33 @@ export class Searching {
     const includePast = document.querySelector('input#past').checked;
     const today = new Date().toISOString().split('T')[0];
 
-    let rides = this.rides.filter(ride => { 
+    const rides = this.rides.filter(ride => { 
       return includePast || (ride.date >= today);
     });
-    const matchedRides = rides.filter(ride => { 
-      return JSON.stringify(ride).toLowerCase().includes(text);
-    });
+    const matchedRides = this._tokenFilter(rides);
     console.log(`matched ${matchedRides.length}`)
     this.displayCb(matchedRides);
+  }
+
+  _searchTokens(){
+    const text = this._value().toLowerCase();
+    const words = text.split(' ');
+    const result = [];
+    let token = '';
+    words.forEach(word => {
+      result.push(word);
+    });
+    return result;
+  }
+
+  _tokenFilter(rides){
+    const tokens = this._searchTokens();
+    console.log(`tokens: ${tokens}`)
+    return rides.filter(ride => { 
+      return tokens.every( token => { 
+        return JSON.stringify(ride).toLowerCase().includes(token);
+      });
+    });
   }
 
   _input(){
