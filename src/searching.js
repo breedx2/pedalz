@@ -57,7 +57,7 @@ export class Searching {
       if(word.startsWith('"') && word.endsWith('"')){
         word = word.replace(/^"/, '').replace(/"$/, '')
         if(prefix){
-          result.push({ [prefix]: word})
+          result.push([prefix, word])
           prefix = '';
           return;
         }
@@ -71,7 +71,7 @@ export class Searching {
         if(token){
           word = word.replace(/"$/, '');
           if(prefix){
-            result.push({[prefix]: `${token} ${word}`})
+            result.push([prefix, `${token} ${word}`])
           }
           else {
             result.push(`${token} ${word}`);            
@@ -107,6 +107,14 @@ export class Searching {
     console.log(`tokens: ${JSON.stringify(tokens)}`)
     return rides.filter(ride => { 
       return tokens.every( token => { 
+        if(Array.isArray(token)){
+          const [k,v] = token;
+          console.log(`ninja ${ride.organizer} ${v}`)
+          if(k === 'host' && ride.organizer.toLowerCase().includes(v)){
+            return true;
+          }
+          return false;
+        }
         // TODO: This sucks because it matches object keys, whatever, nobody cares.
         return JSON.stringify(ride).toLowerCase().includes(token);
       });
