@@ -10,3 +10,14 @@ body {
   font-size: 12px;
 }
 
+a {
+  text-decoration: none;
+}
+
+a:hover { 
+  background-color: #dddddd;
+}
+
+#searchwrap {
+  margin-bottom: 20px;
+}
