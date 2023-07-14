@@ -18,4 +18,5 @@ jobs:
       - run: npm run fetch
       - run: npm run build
       - uses: actions/upload-pages-artifact@v2
-        path: dist/
+        with:
+          path: dist/
