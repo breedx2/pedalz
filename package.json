@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "dev": "webpack serve"
+    "dev": "webpack serve",
+    "fetch": "node src/fetch-data.js && mv /tmp/pedalpalooza.json src/events-all.json"
   },
   "author": "",
   "license": "ISC",
