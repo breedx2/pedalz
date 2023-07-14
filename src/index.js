@@ -1,4 +1,4 @@
-import './bikeyshit.css';
+import './pedalz.css';
 import eventsAll from './events-all.json';
 import { Searching } from './searching';
 
@@ -13,7 +13,6 @@ window.addToSearch = function(value){
   console.log("FU!");
   searching.addToSearch(value);
 }
-
 
 function makeCardHtml(ride){
   let html = `
