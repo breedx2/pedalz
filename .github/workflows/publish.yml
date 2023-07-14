@@ -2,7 +2,7 @@ name: build and publish data
 
 on:
   schedule:
-    - cron: "*/6 * * * *"
+    - cron: "* */6 * * *"
   workflow_dispatch:
 
 jobs:
