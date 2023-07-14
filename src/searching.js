@@ -134,4 +134,9 @@ export class Searching {
     return this._input().value.trim();
   }
 
+  addToSearch(value){
+    this._input().value += ` ${value}`;
+    this.search();
+  }
+
 }

@@ -9,6 +9,12 @@ function clearRides(){
   document.querySelector('div#rides').innerHTML = '';
 }
 
+window.addToSearch = function(value){
+  console.log("FU!");
+  searching.addToSearch(value);
+}
+
+
 function makeCardHtml(ride){
   let html = `
   <h1>${ride.title}
@@ -20,7 +26,6 @@ function makeCardHtml(ride){
   if(ride.locdetails) {
     startLoc += ` (${ride.locdetails.trim()})`;
   }
-  //TODO: Make date clickable
   html += `</h1>
   <b>When</b>: <rdate>${ride.date} ${ride.time}</rdate>`;
   if(ride.timedetails){
@@ -32,12 +37,14 @@ function makeCardHtml(ride){
   if(ride.locend){
     html += `<b>End</b>: <rend>${ride.locend}</rend><br/>`;
   }
+  const hostClick = `window.addToSearch("host:\\"${ride.organizer.trim()}\\\"")`;
   html += `
-  <b>Host</b>: <rhost><a href="">${ride.organizer}</a></rhost>
+  <b>Host</b>: <rhost><a href="#" onclick='${hostClick}'>${ride.organizer}</a></rhost>
   <p class='ride-desc'>${ride.details}</p>
   `;
   return html;
 }
+
 
 // Make a ride card
 function makeCard(ride){
