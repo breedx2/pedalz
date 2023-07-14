@@ -15,4 +15,5 @@ jobs:
         with:
           node-version: 18.13.0
       - run: npm install
-      - run: npm run fetch build
+      - run: npm run fetch
+      - run: npm run build
