@@ -2,7 +2,7 @@
 
 an experimental ux for pdx pedalpalooza
 
-the website is here: [tbd](xxx)
+the website is here: https://breedx2.github.io/pedalz
 
 tell your friends, or don't. bikevana don't care!
 
