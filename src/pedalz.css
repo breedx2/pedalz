@@ -22,3 +22,9 @@ a:hover {
 #searchwrap {
   margin-bottom: 20px;
 }
+
+
+.octocat {
+  width: 40px;
+  margin-bottom: -15px;
+}

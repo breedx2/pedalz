@@ -1,5 +1,6 @@
 import './pedalz.css';
 import eventsAll from './events-all.json';
+import octocat from '../images/octocat.png';
 import { Searching } from './searching';
 
 const rides = eventsAll.events;
