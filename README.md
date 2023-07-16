@@ -27,7 +27,6 @@ local live-refresh dev server:
 npm run dev
 ```
 
+## references
 
-## todo
-
-one day we should make a production webpack lol.
+* (Pedalpalooza API](https://github.com/shift-org/shift-docs/blob/main/docs/CALENDAR_API.md)
