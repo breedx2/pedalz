@@ -21,7 +21,11 @@ function makeCardHtml(ride){
   <h1>${ride.title}
     <a title='pedalpalooza permalink' href="${ride.shareable}">🚲</a>`;
   if(ride.weburl){
-    html += `&nbsp;<a title='web link' href="${ride.weburl}">🕸️</a>`;
+    if(!ride.weburl.startsWith('http')){
+      ride.weburl = 'http://' + ride.weburl;
+    }
+    const title = ride.webname ? ride.webname : 'web link';
+    html += `&nbsp;<a title="${title}" href="${ride.weburl}">🕸️</a>`;
   }
   let startLoc = `${ride.venue} - ${ride.address}`;
   if(ride.locdetails) {
