@@ -1,3 +1,22 @@
+/* Light mode values (Default) */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #1a1a1a;
+  --link-color: #333333;
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+}
+
+/* Dark mode values */
+[data-theme="dark"] {
+  --bg-color: #2e2e2e;
+  --text-color: #e6ebc9;
+  --link-color: #cbe38f;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+}
+
+
 html {
   margin: 0px;
   padding: 0px;
@@ -12,7 +31,7 @@ body {
 
 a {
   text-decoration: none;
-  color: #333333;
+  color: var(--link-color, #1a1a1a); /* Use link color variable or default */
 }
 
 a:hover { 
@@ -25,6 +44,11 @@ a:hover {
 
 
 .octocat {
+  width: 40px;
+  margin-bottom: -15px;
+}
+
+.darkmode {
   width: 40px;
   margin-bottom: -15px;
 }

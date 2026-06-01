@@ -1,6 +1,7 @@
 import './pedalz.css';
 import eventsAll from './events-all.json';
 import octocat from '../images/octocat.png';
+import darkmode from '../images/darkmode.png';
 import { Searching } from './searching';
 
 const rides = eventsAll.events;
@@ -64,6 +65,18 @@ function displayResults(matchedRides){
   clearRides();
   matchedRides.forEach(ride => addRide(ride));
   document.querySelector('span#matchct').innerHTML = `<b>[${matchedRides.length} rides found]</b>`;
+}
+
+document.querySelector('a#darkmode-link').addEventListener('click', toggleDarkMode);
+const savedTheme = localStorage.getItem('theme');
+const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+const initialTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
+document.documentElement.setAttribute('data-theme', initialTheme);
+
+function toggleDarkMode(){
+  const currentTheme = document.documentElement.getAttribute('data-theme');
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', newTheme);
 }
 
 const searching = new Searching(rides, displayResults);
