@@ -10,9 +10,15 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
+    clean: true,
   },
   module: {
     rules: [
+      {
+        test: /\.html$/i,
+        loader: 'html-loader',
+      },
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
@@ -20,13 +26,6 @@ module.exports = {
       {
         test: /\.(png|jp(e*)g|svg)$/,  
         type: 'asset/resource',
-        // use: [{
-        //     loader: 'url-loader',
-        //     options: { 
-        //         limit: 5000, // Convert images < 5kb to base64 strings
-        //         name: 'images/[name].[ext]'
-        //     } 
-        // }]
     }
     ],
   },
