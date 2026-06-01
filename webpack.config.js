@@ -19,13 +19,14 @@ module.exports = {
       },
       {
         test: /\.(png|jp(e*)g|svg)$/,  
-        use: [{
-            loader: 'url-loader',
-            options: { 
-                limit: 5000, // Convert images < 5kb to base64 strings
-                name: 'images/[name].[ext]'
-            } 
-        }]
+        type: 'asset/resource',
+        // use: [{
+        //     loader: 'url-loader',
+        //     options: { 
+        //         limit: 5000, // Convert images < 5kb to base64 strings
+        //         name: 'images/[name].[ext]'
+        //     } 
+        // }]
     }
     ],
   },
